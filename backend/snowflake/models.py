@@ -1,7 +1,6 @@
 from django.db import models
 from django.contrib import admin
 from django.contrib import auth
-import jsonfield
 
 
 class Fridge(models.Model):
@@ -15,7 +14,6 @@ class FridgeAdmin(admin.ModelAdmin):
 class Item(models.Model):
     name = models.TextField()
     quantity = models.IntegerField()
-    nutritional_estimation = jsonfield.JSONField()
     date_entered = models.DateTimeField(auto_now_add=True)
 
     fridge = models.ForeignKey('Fridge', on_delete=models.CASCADE, related_name='items')
