@@ -20,5 +20,5 @@ urlpatterns = [
     re_path(r'^signup/$', SignupViewSet.as_view()),
     re_path(r'^signin/$', SigninViewSet.as_view()),
     re_path(r'^api/v1/api-auth/', include('rest_framework.urls', namespace='rest_framework')),
-    re_path(r'^/', render_index)
+    re_path(r'^$', render_index)
 ]
