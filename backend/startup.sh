@@ -15,5 +15,5 @@ exec uwsgi --master \
            --socket /tmp/snowflake.sock \
            --chmod-socket=666 \
 	   --workers 4 \
-	   --static-map /static=/home/ubuntu/backend/static \
-	   --wsgi-file /home/ubuntu/backend/backend/wsgi.py
+	   --static-map /static=/home/ubuntu/piweek2018/backend/static \
+	   --wsgi-file /home/ubuntu/piweek2018/backend/backend/wsgi.py
