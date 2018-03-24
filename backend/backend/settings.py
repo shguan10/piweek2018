@@ -56,7 +56,7 @@ ROOT_URLCONF = 'backend.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': ['/home/ubuntu/piweek2018/backend/static/public'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
