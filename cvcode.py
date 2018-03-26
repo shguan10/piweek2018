@@ -13,18 +13,18 @@ def largest_white_contour_bbox(image_file_name="light.jpg",im=None):
   im2, contours, hierarchy = cv2.findContours(thresh, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
   cont_areas = [cv2.contourArea(cnt) for cnt in contours]
   cnt = contours[np.argmax(cont_areas)]
-  imout=cv2.drawContours(im, [cnt], 0, (0,255,0), 3)
 
-  cv2.imshow('contour',im)
-  cv2.waitKey(0)
-  cv2.destroyAllWindows()
+  # imout=cv2.drawContours(im, [cnt], 0, (0,255,0), 3)
+  # cv2.imshow('contour',im)
+  # cv2.waitKey(0)
+  # cv2.destroyAllWindows()
 
   x,y,w,h = cv2.boundingRect(cnt)
 
-  cv2.rectangle(im,(x,y),(x+w,y+h),(0,255,0),2)
-  cv2.imshow('bbox',im)
-  cv2.waitKey(0)
-  cv2.destroyAllWindows()
+  # cv2.rectangle(im,(x,y),(x+w,y+h),(0,255,0),2)
+  # cv2.imshow('bbox',im)
+  # cv2.waitKey(0)
+  # cv2.destroyAllWindows()
   return (x,y,w,h)
 
 
@@ -33,7 +33,7 @@ def infer_direction(camera):
     read() returns a numpy array representing the image
     isOpened() returns whether there are still images left to process
   """
-  cv.namedWindow("tracking")
+  # cv.namedWindow("tracking")
   ok, image=camera.read()
   if not ok:
     print('Failed to read video')
@@ -54,14 +54,14 @@ def infer_direction(camera):
     ok, newbox = tracker.update(image)
     print(ok, newbox)
 
-    if ok:
-        p1 = (int(newbox[0]), int(newbox[1]))
-        p2 = (int(newbox[0] + newbox[2]), int(newbox[1] + newbox[3]))
-        cv.rectangle(image, p1, p2, (200,0,0))
+    # if ok:
+    #     p1 = (int(newbox[0]), int(newbox[1]))
+    #     p2 = (int(newbox[0] + newbox[2]), int(newbox[1] + newbox[3]))
+    #     cv.rectangle(image, p1, p2, (200,0,0))
 
-    cv.imshow("tracking", image)
-    k = cv.waitKey(1) & 0xff
-    if k == 27 : break # esc pressed
+    # cv.imshow("tracking", image)
+    # k = cv.waitKey(1) & 0xff
+    # if k == 27 : break # esc pressed
 
 def main():
   camera = cv.VideoCapture(sys.argv[1])
