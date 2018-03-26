@@ -6,12 +6,12 @@ from snowflake import models
 class ItemSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Item
-        fields = '__all__'
+        fields = ['name', 'date_entered']
 
 
 class FridgeSerializer(WritableNestedModelSerializer):
     class Meta:
         model = models.Fridge
-        fields = '__all__'
+        fields = ['id', 'items']
 
     items = ItemSerializer(many=True)

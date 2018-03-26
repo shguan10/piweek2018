@@ -125,3 +125,7 @@ USE_TZ = True
 STATIC_URL = '/static/'
 PROJECT_FOLDER = os.path.abspath(os.path.join(__file__, os.pardir))
 STATIC_ROOT = os.path.join(os.path.join(PROJECT_FOLDER, os.pardir), 'static')
+
+# CSRF Token Name
+CSRF_COOKIE_NAME = 'XSRF-TOKEN'
+CSRF_HEADER_NAME = 'HTTP_X_XSRF_TOKEN'

@@ -13,9 +13,7 @@ class FridgeAdmin(admin.ModelAdmin):
 
 class Item(models.Model):
     name = models.TextField()
-    quantity = models.IntegerField()
     date_entered = models.DateTimeField(auto_now_add=True)
-
     fridge = models.ForeignKey('Fridge', on_delete=models.CASCADE, related_name='items')
 
 

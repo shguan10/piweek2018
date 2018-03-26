@@ -25,9 +25,12 @@ class FridgeViewSet(viewsets.GenericViewSet):
 
     # Get Fridge
     def list(self, request : Request):
-        fridge = Fridge.objects.all().filter(user=request.user).get()
-        serializer = FridgeSerializer(fridge)
-        return Response(serializer.data)
+        try:
+            fridge = Fridge.objects.all().filter(user=request.user).get()
+            serializer = FridgeSerializer(fridge)
+            return Response(serializer.data)
+        except Fridge.DoesNotExist:
+            return Response(status=status.HTTP_404_NOT_FOUND);
 
     @list_route(methods=['POST'], url_path='add')
     def add(self, request: Request):
@@ -43,17 +46,19 @@ class FridgeViewSet(viewsets.GenericViewSet):
 
         return Response(status=status.HTTP_501_NOT_IMPLEMENTED)
 
-    @list_route(methods=['GET'], url_path='quantity')
-    def quantity(self, request: Request):
-        fridge = Fridge.objects.all().filter(user=request.user).get()
-
-        if request.query_params.get('item', None):
-            item_name = request.query_params.get('item')
-            item = fridge.items.filter(name=item_name).get()
-            return Response({'quantity': item.quantity})
-
-        quantity = 0
-        for item in fridge.items:
-            quantity += item.quantity
-
-        return Response({'quantity': quantity})
+    @list_route(methods=['GET'], url_path='aggregates')
+    def aggregates(self, request: Request):
+        try:
+            fridge = Fridge.objects.all().filter(user=request.user).get()
+            
+            map = {}
+            items = fridge.items.all()
+            for item in items:
+                if map.get(item.name, None):
+                    map[item.name] = map[item.name] + 1
+                else:
+                    map[item.name] = 1
+                    
+            return Response(map)
+        except Fridge.DoesNotExist:
+            return Response(status=status.HTTP_404_NOT_FOUND);
