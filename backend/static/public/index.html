@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
+    
+    <link rel="shortcut icon" href="/static/public/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/static/public/favicon.ico" type="image/x-icon">
 
     <title>Snowflake</title>
 
@@ -43,11 +46,15 @@
     {% verbatim %}
     <div class="container">
       <div class="py-5 text-center">
-        <img class="d-block mx-auto mb-4" src="http://educ8s.tv/wp-content/uploads/2014/11/Raspberry-Pi-Logo-300x300.png" alt="" width="72" height="72">
+        <img class="d-block mx-auto mb-4" src="https://cdn-images-1.medium.com/max/1200/1*lqUb-_oX3YAlD3vmpGTkwQ.png" alt="" width="180" height="180">
         
         <h2>Snowflake</h2>
-        <p class="lead">
-        Insert a description below...
+        <p class="lead text-left">
+        Snowflake is a upgrade for your fridge, turning any regular fridge into a smart fridge. It will perform automatic food inventory 
+        tracking to provide meal recommendations, suggest recipes, and keep track of expiration dates. On a small scale, users will find 
+        a improvement in their own culinary life as they’re assisted in achieving the full value of the food they buy to create tasty, 
+        delicious, and, best of all, easily-accessible meals. On a larger scale, however, Snowflake will help reduce food waste and amplify 
+        the environmental and health benefits of home cooking.
         </p>
       </div>
       
@@ -161,13 +168,23 @@
             <span class="badge badge-secondary badge-pill">{{totalNumItems}}</span>
           </h4>
           <ul class="list-group mb-3" ng-if="totalNumItems > 0">
-            <li class="list-group-item d-flex justify-content-between lh-condensed" ng-repeat="(item, quantity) in itemCounts">
+            <li class="list-group-item d-flex justify-content-between lh-condensed" ng-repeat="item in itemCounts">
               <div>
-                <h6 class="my-0">{{item}}</h6>
+                <h6 class="my-0">{{item.name}}</h6>
+                <small>Date of oldest item: {{item.last_date}}</small>
+                <small class="text-danger" ng-if="item.expiry_date">(expiry: {{item.expiry_date}})</small>
               </div>
-              <span class="text-muted">{{quantity}}</span>
+              <span class="text-muted">{{item.quantity}}</span>
             </li>
           </ul>
+          
+          <button class="btn btn-primary btn-lg btn-block mb-3" type="submit" ng-click='requestRecipes()' ng-if="totalNumItems > 0">Find Recipes!</button>
+          
+          <div class="card" ng-show="totalNumItems > 0 && recipeData != ''"">
+            <div class="card-body">
+            <pre id="json"></pre>
+            </div>
+          </div>
           
           <ul class="list-group mb-3" ng-if="totalNumItems == 0">
             <li class="list-group-item d-flex justify-content-between lh-condensed">

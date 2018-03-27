@@ -6,7 +6,9 @@ import tempfile
 import datetime
 import pathlib
 from db_ops import update_django
-
+import classify_image as ci
+import os
+from pprint import pprint as pp
 
 def on_new_client(conn, addr):
     connection = conn.makefile('rb')
@@ -17,7 +19,14 @@ def on_new_client(conn, addr):
 
     while True:
         # Read the length of the image as a 32-bit unsigned int. If the length is zero, quit the loop
-        image_len = struct.unpack('<L', connection.read(struct.calcsize('<L')))[0]
+        try:
+          image_len = struct.unpack('<L', connection.read(struct.calcsize('<L')))[0]
+        except:
+          connection.close()
+          print("exiting due to unpack failure")
+          return
+
+        print(image_len)
         if not image_len:
             break
             
@@ -29,11 +38,17 @@ def on_new_client(conn, addr):
             file_stream.write(connection.read(image_len))
 
     # Hit the Tensor
-
+    print("hitting tensor like it was a piece of meat")
+    #print(os.listdir(directory.name))
+    files = os.listdir(directory.name)
+    files = sorted(files, key=lambda x: int(x))
+    for fname in files:
+        pp(ci.identify(fname))
     # Update DB (uncomment below line)
     # update_django(item_name, is_insert, user_id)
 
     connection.close()
+    print("pseudo-SIGINT received")
 
 
 # Start a socket listening for connections on 0.0.0.0:8000
