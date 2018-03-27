@@ -14,6 +14,6 @@ echo "Starting server"
 exec uwsgi --master \
            --socket /tmp/snowflake.sock \
            --chmod-socket=666 \
-	   --workers 4 \
+	   --workers 2 \
 	   --static-map /static=/home/ubuntu/piweek2018/backend/static \
 	   --wsgi-file /home/ubuntu/piweek2018/backend/backend/wsgi.py

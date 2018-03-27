@@ -9,14 +9,14 @@ from db_ops import update_django
 import classify_image as ci
 import os
 from pprint import pprint as pp
-
+from time import sleep
 def on_new_client(conn, addr):
     connection = conn.makefile('rb')
     directory = tempfile.TemporaryDirectory()
     user_id = struct.unpack('<L', connection.read(struct.calcsize('<L')))[0]
     print(directory)
     print(user_id)
-
+    frames_received=0
     while True:
         # Read the length of the image as a 32-bit unsigned int. If the length is zero, quit the loop
         try:
@@ -36,8 +36,9 @@ def on_new_client(conn, addr):
         # Construct a stream to hold the image data and read the image data from the connection
         with open(file, 'wb') as file_stream:
            file_stream.write(connection.read(image_len))
-
+        frames_received+=1
     # Hit the Tensor
+    sleep(frames_received+1)
     print("hitting tensor like it was a piece of meat")
     #print(os.listdir(directory.name))
     files = os.listdir(directory.name)
@@ -47,7 +48,8 @@ def on_new_client(conn, addr):
         print(directory.name+'/'+fname)
         #import shutil
         #shutil.copyfile(directory.name+'/'+fname,'tmp.jpg')
-        pp(ci.identify(directory.name+'/'+fname))
+        ci.identify(directory.name+'/'+fname)
+        #pp(ci.identify(directory.name+'/'+fname))
     # Update DB (uncomment below line)
     #update_django(item_name, is_insert, user_id)
 

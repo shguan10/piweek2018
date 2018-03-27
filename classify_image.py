@@ -147,22 +147,23 @@ def identify(image):
     #   encoding of the image.
     # Runs the softmax tensor by feeding the image_data as input to the graph.
     #print(sess.graph.get_operations())
-    print('here0')
+    #print('here0')
     softmax_tensor = sess.graph.get_tensor_by_name('softmax:0')
-    print('here1')
+    #print('here1')
     predictions = sess.run(softmax_tensor,
                            {'DecodeJpeg/contents:0': image_data})
-    print('here3')
+    #print('here3')
     predictions = np.squeeze(predictions)
-    print('here4')
+    #print('here4')
     # Creates node ID --> English string lookup.
     node_lookup = NodeLookup()
-    print('here5')
+    #print('here5')
     top_k = predictions.argsort()[-5:][::-1]
     # for node_id in top_k:
     #   human_string = node_lookup.id_to_string(node_id)
     #   score = predictions[node_id]
     #   print('%s (score = %.5f)' % (human_string, score))
+    sess.close()
     return [
       (node_lookup.id_to_string(node_id),predictions[node_id])
       for node_id in top_k
