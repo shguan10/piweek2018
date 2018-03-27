@@ -7,6 +7,7 @@ from rest_framework.permissions import IsAuthenticated
 
 from snowflake.serializers import FridgeSerializer
 from snowflake.models import Fridge
+import requests
 
 
 class FridgeViewSet(viewsets.GenericViewSet):
@@ -45,6 +46,26 @@ class FridgeViewSet(viewsets.GenericViewSet):
         # some parsing shit here.....
 
         return Response(status=status.HTTP_501_NOT_IMPLEMENTED)
+
+    @list_route(methods=['GET'], url_path='recipes')
+    def recipes(self, request: Request):
+        try:
+            fridge = Fridge.objects.all().filter(user=request.user).get()
+            items = fridge.items.all().distinct('name')
+            ingredients = [item.name for item in items]
+
+            APP_ID = 'e811971b'
+            APP_KEY = 'a3c3643b01d6b5ad082737af19af71a6'
+            URL = 'https://api.edamam.com/search'
+
+            query = ','.join(ingredients)
+            param = {'q': query, 'app_id': APP_ID, 'app_key': APP_KEY, 'to':30}
+            r = requests.get(URL, params=param)
+            if r.status_code == 200:
+                return Response(r.json())
+            return Response(status=status.HTTP_503_SERVICE_UNAVAILABLE)
+        except Fridge.DoesNotExist:
+            return Response(status=status.HTTP_404_NOT_FOUND)
 
     @list_route(methods=['GET'], url_path='aggregates')
     def aggregates(self, request: Request):

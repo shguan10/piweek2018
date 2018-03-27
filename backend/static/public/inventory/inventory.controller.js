@@ -30,6 +30,15 @@ angular.module('inventory').controller('InventoryController', ['$scope', '$http'
       });
     };
     
+    $scope.recipes = [];
+    $scope.requestRecipes = function() {
+      $http.get('/api/fridge/recipes/').then(function (response) {
+        $scope.recipes = response.data.hits;
+      }).catch(function(err) {
+        console.error(errr);
+      });
+    };
+    
     $scope.loadFridge();
   }
 ]);
