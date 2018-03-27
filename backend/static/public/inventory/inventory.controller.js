@@ -40,25 +40,12 @@ angular.module('inventory').controller('InventoryController', ['$scope', '$http'
         
         items.map(function (item) {
           var name = toTitleCase(item.name);
-          var count = $scope.itemCounts.filter(function (elem) {
-            return elem.name == name;
-          });
-          
           var entered_date = formatDate(item.date_entered);
           
-          if (count.length == 0) {
-            $scope.itemCounts.push({
-              quantity: 1,
-              name: name,
-              last_date: entered_date
-            });
-          } else {
-            var obj = count[0];
-            obj.quantity++;
-            if (entered_date < obj.last_date) {
-              obj.last_date = entered_date;
-            }
-          }
+          $scope.itemCounts.push({
+            name: name,
+            last_date: entered_date
+          });
         });
         
         $scope.itemCounts.map(function (elem) {
@@ -66,6 +53,9 @@ angular.module('inventory').controller('InventoryController', ['$scope', '$http'
           if ($scope.data[lower]) {
             var expiry = new Date(elem.last_date).getTime() + $scope.data[lower] * 24 * 3600 * 1000;
             elem.expiry_date = formatDate(expiry);
+            if (expiry < (new Date()).getTime()) {
+              elem.is_expired = true;
+            }
           }
         });
       }).catch(function(err) {
@@ -79,7 +69,7 @@ angular.module('inventory').controller('InventoryController', ['$scope', '$http'
       $http.get('/api/fridge/recipes/').then(function (response) {
         $scope.recipes = response.data.hits;
         $scope.recipeData = JSON.stringify($scope.recipes, null, 2);
-        document.getElementById("json").innerHTML = $scope.recipeData;
+        // document.getElementById("json").innerHTML = $scope.recipeData;
       }).catch(function(err) {
         console.error(err);
       });
@@ -88,6 +78,8 @@ angular.module('inventory').controller('InventoryController', ['$scope', '$http'
     $scope.loadFridge();
     
     $scope.data = {
+      "butter":90,
+      "peanut butter":90,
       "margarine":90,
       "buttermilk":14,
       "cheese spread":14,

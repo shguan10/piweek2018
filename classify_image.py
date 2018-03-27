@@ -123,16 +123,16 @@ def create_graph():
     graph_def.ParseFromString(f.read())
     _ = tf.import_graph_def(graph_def, name='')
 
-
 def identify(image):
   """Runs inference on an image.
-
+  ASSUMES: the default graph has already been created
   Args:
     image: Image file name.
 
   Returns:
     list of the top five predictions, each prediction is a tuple of (human_readable_name,confidence)
   """
+ 
   if not tf.gfile.Exists(image):
     tf.logging.fatal('File does not exist %s', image)
   image_data = tf.gfile.FastGFile(image, 'rb').read()
@@ -146,14 +146,18 @@ def identify(image):
     # 'DecodeJpeg/contents:0': A tensor containing a string providing JPEG
     #   encoding of the image.
     # Runs the softmax tensor by feeding the image_data as input to the graph.
+    #print(sess.graph.get_operations())
+    print('here0')
     softmax_tensor = sess.graph.get_tensor_by_name('softmax:0')
+    print('here1')
     predictions = sess.run(softmax_tensor,
                            {'DecodeJpeg/contents:0': image_data})
+    print('here3')
     predictions = np.squeeze(predictions)
-
+    print('here4')
     # Creates node ID --> English string lookup.
     node_lookup = NodeLookup()
-
+    print('here5')
     top_k = predictions.argsort()[-5:][::-1]
     # for node_id in top_k:
     #   human_string = node_lookup.id_to_string(node_id)
@@ -164,7 +168,6 @@ def identify(image):
       for node_id in top_k
     ]
 
-create_graph()
 
 if __name__ == '__main__': 
   # Creates graph from saved GraphDef.  

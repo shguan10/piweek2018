@@ -35,17 +35,21 @@ def on_new_client(conn, addr):
                
         # Construct a stream to hold the image data and read the image data from the connection
         with open(file, 'wb') as file_stream:
-            file_stream.write(connection.read(image_len))
+           file_stream.write(connection.read(image_len))
 
     # Hit the Tensor
     print("hitting tensor like it was a piece of meat")
     #print(os.listdir(directory.name))
     files = os.listdir(directory.name)
     files = sorted(files, key=lambda x: int(x))
+    ci.create_graph()
     for fname in files:
-        pp(ci.identify(fname))
+        print(directory.name+'/'+fname)
+        #import shutil
+        #shutil.copyfile(directory.name+'/'+fname,'tmp.jpg')
+        pp(ci.identify(directory.name+'/'+fname))
     # Update DB (uncomment below line)
-    # update_django(item_name, is_insert, user_id)
+    #update_django(item_name, is_insert, user_id)
 
     connection.close()
     print("pseudo-SIGINT received")
