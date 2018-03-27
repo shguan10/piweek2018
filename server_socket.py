@@ -5,6 +5,7 @@ import struct
 import tempfile
 import datetime
 import pathlib
+from db_ops import update_django
 
 
 def on_new_client(conn, addr):
@@ -27,9 +28,12 @@ def on_new_client(conn, addr):
         with open(file, 'wb') as file_stream:
             file_stream.write(connection.read(image_len))
 
+    # Hit the Tensor
+
+    # Update DB (uncomment below line)
+    # update_django(item_name, is_insert, user_id)
+
     connection.close()
-    while True:
-        pass
 
 
 # Start a socket listening for connections on 0.0.0.0:8000
