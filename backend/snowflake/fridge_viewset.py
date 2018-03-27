@@ -56,10 +56,16 @@ class FridgeViewSet(viewsets.GenericViewSet):
 
             APP_ID = 'e811971b'
             APP_KEY = 'a3c3643b01d6b5ad082737af19af71a6'
+            B_APP_ID = 'd355f4b8'
+            B_APP_KEY = 'b41d10565e4c3a436eab0a5b148fa428'
             URL = 'https://api.edamam.com/search'
 
             query = ','.join(ingredients)
             param = {'q': query, 'app_id': APP_ID, 'app_key': APP_KEY, 'to':30}
+            r = requests.get(URL, params=param)
+            if r.status_code == 200:
+                return Response(r.json())
+            param = {'q': query, 'app_id': B_APP_ID, 'app_key': B_APP_KEY, 'to':30}
             r = requests.get(URL, params=param)
             if r.status_code == 200:
                 return Response(r.json())
