@@ -54,8 +54,8 @@ class FridgeViewSet(viewsets.GenericViewSet):
             items = fridge.items.all().distinct('name')
             ingredients = [item.name for item in items]
 
-            APP_ID = 'e811971b'
-            APP_KEY = 'a3c3643b01d6b5ad082737af19af71a6'
+            APP_ID = '842672fb'
+            APP_KEY = '59aff2597b0f7689a7619a17b1a537d0'
             B_APP_ID = 'd355f4b8'
             B_APP_KEY = 'b41d10565e4c3a436eab0a5b148fa428'
             URL = 'https://api.edamam.com/search'

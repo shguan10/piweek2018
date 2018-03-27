@@ -72,6 +72,13 @@ class SigninViewSet(APIView):
         return Response({'message': 'Supplied credentials did not match a valid user'}, status=status.HTTP_401_UNAUTHORIZED)
 
 
+class SignoutViewSet(APIView):
+    permission_classes = [AllowAny]
+    def get(self, request: Request, format=None):
+        auth.logout(request)
+        return Response()
+
+
 def save_profile(sender, instance, created, **kwargs):
     if created:
         Fridge.objects.create(user=instance)

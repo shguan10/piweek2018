@@ -173,6 +173,7 @@ def identify(image):
 if __name__ == '__main__': 
   # Creates graph from saved GraphDef.  
   import pprint
+  create_graph()
   pprint.pprint(identify(sys.argv[1]))
   # parser = argparse.ArgumentParser()
   # # classify_image_graph_def.pb:

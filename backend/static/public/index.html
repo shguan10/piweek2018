@@ -164,7 +164,7 @@
       <div class="row" ng-controller="InventoryController">
         <div class="col-md-12 order-md-12 mb-4" ng-show="authentication.user">
           <h4 class="d-flex justify-content-between align-items-center mb-3">
-            <span class="text-muted">Your Fridge's Contents</span>
+            <span class="text-muted">{{authentication.user.first_name}} {{authentication.user.last_name}} Fridge's Contents</span>
             <span class="badge badge-secondary badge-pill">{{totalNumItems}}</span>
           </h4>
           <ul class="list-group mb-3" ng-if="totalNumItems > 0">
@@ -209,6 +209,8 @@
               </div>
             </li>
           </ul>
+          
+          <button class="btn btn-primary btn-lg btn-block mb-3" type="submit" ng-click='signout()'">Sign Out</button>
         </div>
       </div>
 

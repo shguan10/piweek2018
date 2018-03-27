@@ -1,7 +1,7 @@
 'use strict'
 
-angular.module('inventory').controller('InventoryController', ['$scope', '$http', 'Authentication',
-  function ($scope, $http, Authentication) {
+angular.module('inventory').controller('InventoryController', ['$scope', '$http', 'Authentication', '$window',
+  function ($scope, $http, Authentication, $window) {
     $scope.totalNumItems = 0;
     $scope.itemCounts = [];
     $scope.authentication = Authentication;
@@ -32,6 +32,12 @@ angular.module('inventory').controller('InventoryController', ['$scope', '$http'
       
       return [year, month, day].join('-') + ' ' + [hour, minute, second].join(':');
     }
+    
+    $scope.signout = function() {
+      $http.get('/api/signout/').then(function (response) {
+        $window.location.reload();
+      });
+    };
     
     $scope.loadFridge = function() {
       $http.get('/api/fridge').then(function (response) {
