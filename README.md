@@ -2,6 +2,11 @@
 
 Snowflake is a upgrade for your fridge, turning any regular fridge into a smart fridge. It will perform automatic food inventory tracking to provide meal recommendations, suggest recipes, and keep track of expiration dates. On a small scale, users will find a improvement in their own culinary life as they’re assisted in achieving the full value of the food they buy to create tasty, delicious, and, best of all, easily-accessible meals. On a larger scale, however, Snowflake will help reduce food waste and amplify the environmental and health benefits of home cooking.
 
+## Demo
+<a href="http://www.youtube.com/watch?feature=player_embedded&v=XCwv_y-jH1E
+" target="_blank"><img src="http://img.youtube.com/vi/XCwv_y-jH1E/0.jpg" 
+alt="Youtube demo" width="240" height="180" border="10" /></a>
+
 # Usage
 
 A new user would register their pi to an id and set a password, and the user would mount the pi on their fridge. The pi would then keep track of the foods the user is putting in and taking out of their fridge, keeping track of all items in the fridge. If the user needs some recipes, they can access the Snowflake website, which will suggest for them recipes based on what items are already in their fridge. The website will also detect when foods are expired and alert the user.
@@ -14,6 +19,3 @@ When the user requests recipes, the food inventory will be conglomerated and que
 
 # piweek2018
 https://www.youtube.com/watch?v=k4J7xHBGMlw
-
-# DEMO
-https://www.youtube.com/watch?v=XCwv_y-jH1E&feature=youtu.be
