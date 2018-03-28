@@ -27,4 +27,11 @@ When the pi is initialized, it registers a user and hashed password in a postres
 
 When the user requests recipes, the food inventory will be conglomerated and queried into a Edamame recipe API, returning recipes for the user on the Snowflake website.
 
+## Team
++ [shguan10](https://github.com/shguan10/)
++ [17zhangw](https://github.com/17zhangw/)
++ [unbrace3](https://github.com/unbrace3/)
 
+## Acknowledgements
+We would like to acknowledge the following:
+* Hackberry Pi Week officers and sponsers. Hackberry Pi Week is the 7-day hackathon in which we completed this project.
