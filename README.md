@@ -2,10 +2,18 @@
 
 Snowflake is a upgrade for your fridge, turning any regular fridge into a smart fridge. It will perform automatic food inventory tracking to provide meal recommendations, suggest recipes, and keep track of expiration dates. On a small scale, users will find a improvement in their own culinary life as they’re assisted in achieving the full value of the food they buy to create tasty, delicious, and, best of all, easily-accessible meals. On a larger scale, however, Snowflake will help reduce food waste and amplify the environmental and health benefits of home cooking.
 
-## Demo
-<a href="http://www.youtube.com/watch?feature=player_embedded&v=XCwv_y-jH1E
-" target="_blank"><img src="http://img.youtube.com/vi/XCwv_y-jH1E/0.jpg" 
+# Demo
+<a href="http://www.youtube.com/watch?feature=player_embedded&v=Re4hC_kxpIE
+" target="_blank"><img src="http://img.youtube.com/vi/Re4hC_kxpIE/0.jpg" 
 alt="Youtube demo" width="240" height="180" border="10" /></a>
+A demo of the project working. It's 5 minutes long.
+
+# Pitch
+<a href="http://www.youtube.com/watch?feature=player_embedded&v=k4J7xHBGMlw
+" target="_blank"><img src="http://img.youtube.com/vi/k4J7xHBGMlw/0.jpg" 
+alt="Youtube demo" width="240" height="180" border="10" /></a>
+The original pitch for the idea, recorded for an internship with Capax Global. It's 3 minutes long.
+
 
 # Usage
 
@@ -17,5 +25,4 @@ When the pi is initialized, it registers a user and hashed password in a postres
 
 When the user requests recipes, the food inventory will be conglomerated and queried into a Edamame recipe API, returning recipes for the user on the Snowflake website.
 
-# piweek2018
-https://www.youtube.com/watch?v=k4J7xHBGMlw
+
