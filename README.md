@@ -6,13 +6,15 @@ Snowflake is a upgrade for your fridge, turning any regular fridge into a smart 
 <a href="http://www.youtube.com/watch?feature=player_embedded&v=Re4hC_kxpIE
 " target="_blank"><img src="http://img.youtube.com/vi/Re4hC_kxpIE/0.jpg" 
 alt="Youtube demo" width="240" height="180" border="10" /></a>
-A demo of the project working. It's 5 minutes long.
+
+*A demo of the project working. It's 5 minutes long.*
 
 # Pitch
 <a href="http://www.youtube.com/watch?feature=player_embedded&v=k4J7xHBGMlw
 " target="_blank"><img src="http://img.youtube.com/vi/k4J7xHBGMlw/0.jpg" 
 alt="Youtube demo" width="240" height="180" border="10" /></a>
-The original pitch for the idea, recorded for an internship with Capax Global. It's 3 minutes long.
+
+*The original pitch for the idea, recorded for an internship with Capax Global. It's 3 minutes long.*
 
 
 # Usage
